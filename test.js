@@ -1,3 +1,2 @@
-var x = "ZXC"
-var y = Number.parseInt(x)
-console.log(!y);
+const x = "X" + "-id"
+console.log(x);

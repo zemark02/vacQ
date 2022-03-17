@@ -13,12 +13,15 @@ exports.getHospitals = async(req,res,next)=>{
     //loop over remove fields and   delete them from reqQuery
     removeFields.forEach(param=>delete reqQuery[param]);
     console.log(reqQuery);
-
+    console.log(removeFields);
     //Create query string
 
     let queryStr = JSON.stringify(reqQuery);
+
     queryStr = queryStr.replace(/\b(gt|gte|lt|let|in)\b/g,match=>`$${match}`)
-    query = Hospital.find(JSON.parse(queryStr)).populate('appointment')
+
+    query = Hospital.find(JSON.parse(queryStr))
+
 
     //Select Feilds
     if(req.query.select){
@@ -32,6 +35,7 @@ exports.getHospitals = async(req,res,next)=>{
         const sortBy = req.query.sort.split(',').join(' ');
         query = query.sort(sortBy)
     }else{
+ 
         query = query.sort('-createAt');
     }
 
