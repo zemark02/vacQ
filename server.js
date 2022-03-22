@@ -2,11 +2,11 @@ const express = require('express')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db')
-
+const connection = require('./config/vacCenterDB')
 dotenv.config({path:'./config/config.env'})
 
 connectDB();
-
+connection;
 const app = express();
 
 //add cookie parser

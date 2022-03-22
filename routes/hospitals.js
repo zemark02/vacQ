@@ -4,7 +4,13 @@ const controller = require('../controllers/hospitals')
 const {protect,authorize} = require('../middlewares/auth')
 const appointmentRouter = require('./appointments')
 
+const {getVaccenters} = require('../controllers/hospitals')
+
+
 router.use('/:hospitalId/appointments',appointmentRouter)
+
+router.route('/vacCenters').get(getVaccenters)
+
 router.route('/').get(controller.getHospitals)
                  .post(protect,authorize('admin'),controller.createHospital)
 

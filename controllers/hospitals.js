@@ -1,6 +1,24 @@
 const Appointment = require('../models/Appointment');
 const Hospital = require('../models/Hospital')
 
+const VacCenter = require('../models/VacCenter')
+
+//@desc Get vaccine centers
+//@route GET /api/v1/hospitals/vacCenters/
+//@access Public
+exports.getVaccenters = (req,res,next)=>{
+    VacCenter.getAll((err,data)=>{
+        if(err){
+            res.status(500).send({
+                message:err.message || "Some error occured while retrieving Vaccine Centers."
+            })
+        }else{
+            res.send(data);
+        }
+    })
+}
+
+
 exports.getHospitals = async(req,res,next)=>{
     let query;
 
@@ -20,7 +38,7 @@ exports.getHospitals = async(req,res,next)=>{
 
     queryStr = queryStr.replace(/\b(gt|gte|lt|let|in)\b/g,match=>`$${match}`)
 
-    query = Hospital.find(JSON.parse(queryStr))
+    query =  Hospital.find(JSON.parse(queryStr))
 
 
     //Select Feilds

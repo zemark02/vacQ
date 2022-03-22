@@ -112,7 +112,7 @@ exports.updateAppointment =  async (req,res,next)=>{
         }
 
         if(appointment.user.toString() !== req.user.id && req.user.role != "admin"){
-
+            
             return res.status(401).json({success:false,message:`User ${req.user.id} is not authorize to update this appointment`})
         }
 
