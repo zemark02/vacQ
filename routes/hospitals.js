@@ -85,7 +85,54 @@ const {getVaccenters} = require('../controllers/hospitals')
 * @swagger
 * /hospitals/{id}:
 *   get:
-*       summary: Get the hospital by id
+*     summary: Get the hospital by id
+*     tags: [Hospitals]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: string
+*           required: true
+*           description: The hospital id
+*         responses:
+*           200:
+*             description: The hospital description by id
+*             content:
+*               application/json:
+*               schema:
+*                 $ref: '#/components/schemas/Hospital'
+*           404:
+*             description: The hospital was not found
+*/
+
+/**
+* @swagger
+* /hospitals:
+*   post:
+*     summary: Create a new hospital
+*     tags: [Hospitals]
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/Hospital'
+*     responses:
+*       201:
+*         description: The hospital was successfully created
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Hospital'
+*       500:
+*         description: Some server error
+*/
+
+/**
+* @swagger
+* /hospitals/{id}:
+*   put:
+*       summary: Update the hospital by the id
 *       tags: [Hospitals]
 *       parameters:
 *           - in: path
@@ -94,13 +141,41 @@ const {getVaccenters} = require('../controllers/hospitals')
 *               type: string
 *             required: true
 *             description: The hospital id
-*        responses:
+*       requestBody:
+*           required: true
+*           content:
+*               application/json:
+*                   schema:
+*                       $ref: '#/components/schemas/Hospital'
+*       responses:
 *           200:
-*               description: The hospital description by id
-*               contents:
+*               description: The hospital was updated
+*               content:
 *                   application/json:
 *                       schema:
 *                           $ref: '#/components/schemas/Hospital'
+*           404:
+*               description: The hospital was not found
+*           500:
+*               description: Some error happened
+*/
+
+/**
+* @swagger
+* /hospitals/{id}:
+*   delete:
+*       summary: Remove the hospital by id
+*       tags: [Hospitals]
+*       parameters:
+*           - in: path
+*             name: id
+*             schema:
+*               type: string
+*             required: true
+*             description: The hospital id
+*       responses:
+*           200:
+*               description: The hospital was deleted
 *           404:
 *               description: The hospital was not found
 */
